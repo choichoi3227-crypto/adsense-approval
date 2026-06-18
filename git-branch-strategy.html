@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀 개발을 위한 Git 브랜치 전략 정리 | 서버랩</title>
+<meta name="description" content="여러 명이 함께 개발할 때 충돌을 줄이고 배포를 안정적으로 관리하기 위한 브랜치 전략을 소개합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/git-branch-strategy.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html" class="active">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">데브옵스</span>
+          <span class="date">2026.04.15</span>
+        </div>
+        <h1>팀 개발을 위한 Git 브랜치 전략 정리</h1>
+        <p class="lead">브랜치 전략은 거창한 규칙이 아니라, 팀이 코드를 안전하게 합치기 위한 약속입니다.</p>
+
+      <h2>기본 브랜치 구성</h2>
+      <ul><li><code>main</code> — 실제 운영 환경에 배포되는 안정 버전</li><li><code>develop</code> — 다음 배포를 준비하는 통합 브랜치</li><li><code>feature/*</code> — 개별 기능 개발용 브랜치</li></ul>
+      <h2>기능 브랜치 작업 흐름</h2>
+      <p>새로운 기능을 개발할 때는 develop 브랜치에서 <code>feature/기능명</code> 브랜치를 분기해 작업하고, 완료되면 Pull Request를 통해 코드 리뷰를 거친 뒤 다시 develop에 병합하는 흐름이 일반적입니다.</p>
+      <h2>배포 전 안정화</h2>
+      <p>develop 브랜치에 충분한 기능이 모이면 <code>release</code> 브랜치를 만들어 최종 테스트를 진행하고, 문제가 없으면 main에 병합하여 배포합니다.</p>
+      <h2>긴급 수정(Hotfix)</h2>
+      <p>운영 환경에서 긴급한 버그가 발견되면 main에서 직접 <code>hotfix</code> 브랜치를 분기해 수정한 뒤, main과 develop 양쪽에 모두 반영하는 것이 일반적인 처리 방식입니다.</p>
+
+        <div class="post-nav">
+          <a href="monitoring-and-alerting-basics.html" class="prev">&larr; 이전 글<span>서버 모니터링과 알림 체계 구축 기본기</span></a>
+          <span></span>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
