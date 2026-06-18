@@ -1,0 +1,63 @@
+name: Inject AdSense Script
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  inject-adsense:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # 파일 커밋 권한
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Inject AdSense script into HTML files
+        run: |
+          ADSENSE_SCRIPT='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543" crossorigin="anonymous"></script>'
+          CHANGED=0
+
+          # 모든 HTML 파일 탐색 (node_modules, .git 제외)
+          while IFS= read -r -d '' file; do
+            # 이미 삽입되어 있으면 스킵
+            if grep -qF 'ca-pub-5852370252252543' "$file"; then
+              echo "⏭️  Already injected: $file"
+              continue
+            fi
+
+            # </head> 태그 앞에 삽입
+            if grep -qi '</head>' "$file"; then
+              sed -i "s|</head>|  ${ADSENSE_SCRIPT}\n</head>|I" "$file"
+              echo "✅ Injected into: $file"
+              CHANGED=1
+            else
+              echo "⚠️  No </head> found, skipping: $file"
+            fi
+          done < <(find . \
+            -type f \
+            \( -name "*.html" -o -name "*.htm" \) \
+            -not -path './.git/*' \
+            -not -path './node_modules/*' \
+            -not -path './_site/*' \
+            -not -path './dist/*' \
+            -not -path './build/*' \
+            -print0)
+
+          echo "inject_changed=$CHANGED" >> $GITHUB_ENV
+
+      - name: Commit and push changes
+        if: env.inject_changed == '1'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: inject AdSense script into HTML files [skip ci]"
+          git push
