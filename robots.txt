@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+
 Sitemap: https://cloud-press.co.kr/sitemap.xml
+Sitemap: https://jiwunin.co.kr/sitemap.xml
+Sitemap: https://info100.kr/sitemap.xml
