@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloudflare Workers 입문: 서버리스 엣지 컴퓨팅 이해하기 | 서버랩</title>
+<meta name="description" content="별도의 서버 없이 전 세계 엣지 네트워크에서 코드를 실행하는 Cloudflare Workers의 기본 개념을 소개합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/cloudflare-workers-intro.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html" class="active">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-cloud.html">클라우드 인프라</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">클라우드 인프라</span>
+          <span class="date">2026.02.09</span>
+        </div>
+        <h1>Cloudflare Workers 입문: 서버리스 엣지 컴퓨팅 이해하기</h1>
+        <p class="lead">Cloudflare Workers는 전통적인 서버를 띄우지 않고도 전 세계 수백 개의 엣지 위치에서 코드를 실행할 수 있게 해주는 서버리스 플랫폼입니다.</p>
+
+      <h2>Workers가 일반 서버와 다른 점</h2>
+      <p>일반적인 서버는 특정 지역의 데이터센터 한 곳에서 실행되지만, Workers는 요청이 들어온 위치와 가장 가까운 엣지 노드에서 즉시 실행됩니다. 이 덕분에 지연 시간이 크게 줄어듭니다.</p>
+      <h2>기본 코드 구조</h2>
+      <pre><code>export default {
+  async fetch(request, env, ctx) {
+    return new Response("Hello from the edge!");
+  }
+};</code></pre>
+      <p>Workers는 V8 엔진의 Isolate 기반으로 동작하기 때문에 컨테이너 방식보다 콜드 스타트가 훨씬 빠른 것이 특징입니다.</p>
+      <h2>활용 사례</h2>
+      <ul><li>API 요청 캐싱 및 가공</li><li>여러 오리진 서버 앞단의 라우팅 프록시</li><li>A/B 테스트 및 리다이렉트 로직</li><li>정적 사이트의 동적 기능 보강</li></ul>
+      <h2>배포 방법</h2>
+      <p>wrangler CLI를 사용하면 로컬에서 작성한 코드를 명령 한 줄로 전 세계 엣지에 배포할 수 있습니다. <code>wrangler deploy</code> 명령이 가장 기본적인 배포 절차입니다.</p>
+
+        <div class="post-nav">
+          <span></span>
+          <a href="aws-vs-gcp-vs-cloudflare.html" class="next">다음 글 &rarr;<span>AWS, GCP, Cloudflare 클라우드 플랫폼 특징 비교</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
