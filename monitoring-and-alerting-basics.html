@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서버 모니터링과 알림 체계 구축 기본기 | 서버랩</title>
+<meta name="description" content="장애를 빠르게 인지하기 위한 모니터링 지표 선정과 알림 설정의 기본 원칙을 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/monitoring-and-alerting-basics.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html" class="active">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">데브옵스</span>
+          <span class="date">2026.04.10</span>
+        </div>
+        <h1>서버 모니터링과 알림 체계 구축 기본기</h1>
+        <p class="lead">장애는 막을 수 없어도, 얼마나 빨리 알아채느냐는 충분히 관리할 수 있는 영역입니다.</p>
+
+      <h2>기본적으로 확인해야 할 지표</h2>
+      <ul><li>CPU 사용률</li><li>메모리 사용률</li><li>디스크 여유 공간</li><li>네트워크 트래픽</li><li>애플리케이션 응답 시간 및 오류율</li></ul>
+      <h2>모니터링 도구 선택</h2>
+      <p>Prometheus와 Grafana 조합은 오픈소스 환경에서 가장 널리 쓰이는 모니터링 스택 중 하나입니다. 지표를 수집(Prometheus)하고 시각화(Grafana)하는 역할을 각각 담당합니다.</p>
+      <h2>알림 설정 원칙</h2>
+      <p>알림이 너무 많으면 오히려 중요한 신호를 놓치게 됩니다. 실제로 조치가 필요한 임계값에서만 알림이 발생하도록 설정하고, 심각도에 따라 알림 채널(이메일, 메신저 등)을 분리하는 것이 좋습니다.</p>
+      <h2>장애 대응 기록</h2>
+      <p>장애가 발생했을 때 어떤 알림이 왔고 어떻게 대응했는지 기록을 남겨두면, 이후 유사한 문제가 재발했을 때 대응 시간을 크게 단축할 수 있습니다.</p>
+
+        <div class="post-nav">
+          <a href="infrastructure-as-code-intro.html" class="prev">&larr; 이전 글<span>코드로 인프라 관리하기: IaC 개념 정리</span></a>
+          <a href="git-branch-strategy.html" class="next">다음 글 &rarr;<span>팀 개발을 위한 Git 브랜치 전략 정리</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
