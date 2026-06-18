@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example-serverlab.pages.dev/</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/about.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/contact.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/privacy-policy.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/disclaimer.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/category-server.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/category-cloud.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/category-network.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/category-devops.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/linux-server-initial-setup.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/nginx-reverse-proxy-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/systemd-service-management.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/linux-disk-monitoring.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/server-backup-strategy.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cloudflare-workers-intro.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/aws-vs-gcp-vs-cloudflare.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cdn-basics-explained.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/object-storage-vs-block-storage.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/serverless-vs-traditional-server.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/https-and-tls-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/firewall-basic-rules.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/dns-record-types-explained.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/ssh-key-management.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/brute-force-protection.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/docker-basics-for-beginners.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/ci-cd-pipeline-concept.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/infrastructure-as-code-intro.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/monitoring-and-alerting-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/git-branch-strategy.html</loc></url>
+</urlset>
