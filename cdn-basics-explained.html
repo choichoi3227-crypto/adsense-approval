@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CDN의 작동 원리와 도입 효과 | 서버랩</title>
+<meta name="description" content="콘텐츠 전송 네트워크(CDN)가 웹사이트 속도와 안정성에 어떤 영향을 주는지 기본 원리부터 설명합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/cdn-basics-explained.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html" class="active">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-cloud.html">클라우드 인프라</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">클라우드 인프라</span>
+          <span class="date">2026.02.18</span>
+        </div>
+        <h1>CDN의 작동 원리와 도입 효과</h1>
+        <p class="lead">사용자와 물리적으로 가까운 곳에서 콘텐츠를 제공하는 것, CDN의 핵심은 결국 거리를 줄이는 것입니다.</p>
+
+      <h2>CDN이 필요한 이유</h2>
+      <p>오리진 서버가 미국에 있는데 한국 사용자가 접속한다면, 데이터가 태평양을 왕복하는 동안 지연이 발생합니다. CDN은 전 세계 곳곳에 콘텐츠 사본을 캐싱해 두어 사용자와 가장 가까운 노드에서 응답하도록 합니다.</p>
+      <h2>캐싱 동작 방식</h2>
+      <p>정적 자원(이미지, CSS, JS 등)은 CDN 엣지 노드에 캐싱되며, Cache-Control 헤더에 따라 캐시 유효 기간이 결정됩니다. 캐시가 만료되면 CDN이 오리진 서버에 다시 요청해 최신 콘텐츠를 가져옵니다.</p>
+      <h2>부가적인 보안 효과</h2>
+      <p>대부분의 CDN은 DDoS 공격 방어, WAF(웹 방화벽), TLS 인증서 자동 관리 같은 부가 기능도 함께 제공하기 때문에 단순한 속도 개선을 넘어 보안 측면에서도 이점이 있습니다.</p>
+      <h2>도입 시 고려사항</h2>
+      <p>동적 콘텐츠가 많은 사이트는 캐시 전략을 신중하게 설계해야 하며, 캐시 무효화(퍼지) 정책도 미리 정해두는 것이 좋습니다.</p>
+
+        <div class="post-nav">
+          <a href="aws-vs-gcp-vs-cloudflare.html" class="prev">&larr; 이전 글<span>AWS, GCP, Cloudflare 클라우드 플랫폼 특징 비교</span></a>
+          <a href="object-storage-vs-block-storage.html" class="next">다음 글 &rarr;<span>오브젝트 스토리지와 블록 스토리지의 차이</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
