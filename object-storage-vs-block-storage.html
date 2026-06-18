@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오브젝트 스토리지와 블록 스토리지의 차이 | 서버랩</title>
+<meta name="description" content="클라우드 환경에서 자주 등장하는 두 가지 스토리지 방식의 구조적 차이와 활용 분야를 정리합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/object-storage-vs-block-storage.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html" class="active">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-cloud.html">클라우드 인프라</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">클라우드 인프라</span>
+          <span class="date">2026.02.23</span>
+        </div>
+        <h1>오브젝트 스토리지와 블록 스토리지의 차이</h1>
+        <p class="lead">같은 '저장소'라는 단어를 쓰지만, 오브젝트 스토리지와 블록 스토리지는 내부 동작 방식부터 적합한 용도까지 크게 다릅니다.</p>
+
+      <h2>블록 스토리지란</h2>
+      <p>데이터를 고정 크기의 블록 단위로 저장하며, 운영체제가 파일 시스템을 통해 직접 관리합니다. AWS EBS, 일반적인 가상 디스크가 대표적인 예이며 데이터베이스처럼 빈번한 읽기/쓰기가 필요한 작업에 적합합니다.</p>
+      <h2>오브젝트 스토리지란</h2>
+      <p>데이터를 파일과 메타데이터를 합친 하나의 '오브젝트' 단위로 저장하며, HTTP API를 통해 접근합니다. S3, Cloudflare R2, GCS가 대표적이며 이미지, 동영상, 백업 파일처럼 변경이 적은 대용량 데이터 저장에 적합합니다.</p>
+      <h2>핵심 차이 비교</h2>
+      <table><tr><th>구분</th><th>블록 스토리지</th><th>오브젝트 스토리지</th></tr><tr><td>접근 방식</td><td>파일 시스템</td><td>HTTP API</td></tr><tr><td>적합한 용도</td><td>DB, OS 디스크</td><td>정적 파일, 백업</td></tr><tr><td>확장성</td><td>제한적</td><td>매우 높음</td></tr></table>
+      <h2>선택 가이드</h2>
+      <p>운영체제를 설치하거나 데이터베이스를 운영해야 한다면 블록 스토리지가, 정적 자산이나 로그 아카이브를 저장한다면 오브젝트 스토리지가 더 경제적이고 적합한 선택입니다.</p>
+
+        <div class="post-nav">
+          <a href="cdn-basics-explained.html" class="prev">&larr; 이전 글<span>CDN의 작동 원리와 도입 효과</span></a>
+          <a href="serverless-vs-traditional-server.html" class="next">다음 글 &rarr;<span>서버리스 아키텍처, 언제 도입해야 할까</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
