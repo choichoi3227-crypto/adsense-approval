@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTPS와 TLS 인증서 동작 원리 쉽게 이해하기 | 서버랩</title>
+<meta name="description" content="웹사이트 보안의 기본인 HTTPS와 TLS 인증서가 어떻게 통신을 암호화하는지 핵심만 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/https-and-tls-basics.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html" class="active">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-network.html">네트워크/보안</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">네트워크/보안</span>
+          <span class="date">2026.03.03</span>
+        </div>
+        <h1>HTTPS와 TLS 인증서 동작 원리 쉽게 이해하기</h1>
+        <p class="lead">주소창의 자물쇠 아이콘 하나에는 생각보다 많은 암호화 과정이 숨어 있습니다.</p>
+
+      <h2>HTTP와 HTTPS의 차이</h2>
+      <p>HTTP는 평문으로 데이터를 주고받기 때문에 중간에서 누구나 내용을 가로채 볼 수 있습니다. HTTPS는 TLS를 통해 통신 내용을 암호화하여 제3자가 가로채더라도 내용을 알아볼 수 없게 합니다.</p>
+      <h2>TLS 핸드셰이크 과정</h2>
+      <ul><li>클라이언트가 서버에 접속을 요청하며 지원 가능한 암호화 방식을 전달</li><li>서버가 인증서를 제시하고 사용할 암호화 방식을 결정</li><li>키 교환을 통해 양측이 동일한 세션 키를 생성</li><li>이후 모든 통신은 이 세션 키로 암호화</li></ul>
+      <h2>인증서가 신뢰받는 이유</h2>
+      <p>TLS 인증서는 신뢰할 수 있는 인증기관(CA)이 서명합니다. 브라우저는 사전에 신뢰하는 CA 목록을 가지고 있어, 해당 CA가 서명한 인증서를 자동으로 신뢰하게 됩니다.</p>
+      <h2>무료 인증서 발급</h2>
+      <p>Let's Encrypt 같은 서비스를 이용하면 무료로 TLS 인증서를 발급받아 자동 갱신까지 설정할 수 있습니다. Cloudflare를 사용하는 경우에는 별도 설정 없이 기본적으로 TLS가 적용됩니다.</p>
+
+        <div class="post-nav">
+          <span></span>
+          <a href="firewall-basic-rules.html" class="next">다음 글 &rarr;<span>방화벽 기본 규칙 설계 가이드</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
