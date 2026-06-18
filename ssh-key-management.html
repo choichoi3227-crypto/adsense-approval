@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSH 키 생성과 안전한 관리 방법 | 서버랩</title>
+<meta name="description" content="SSH 키 쌍을 생성하고 여러 서버를 안전하게 관리하기 위한 실무 팁을 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/ssh-key-management.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html" class="active">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-network.html">네트워크/보안</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">네트워크/보안</span>
+          <span class="date">2026.03.18</span>
+        </div>
+        <h1>SSH 키 생성과 안전한 관리 방법</h1>
+        <p class="lead">비밀번호보다 안전한 SSH 키, 제대로 만들고 제대로 관리하는 방법을 알아봅니다.</p>
+
+      <h2>키 쌍 생성</h2>
+      <pre><code>ssh-keygen -t ed25519 -C "my-server-key"</code></pre>
+      <p>ed25519 알고리즘은 RSA보다 키 길이가 짧으면서도 보안성이 높아 최근 널리 권장되는 방식입니다.</p>
+      <h2>공개키 등록</h2>
+      <p>생성된 공개키(<code>.pub</code> 파일)는 <code>ssh-copy-id user@server</code> 명령으로 간편하게 서버에 등록할 수 있습니다. 수동으로 등록하려면 서버의 <code>~/.ssh/authorized_keys</code> 파일에 공개키 내용을 추가하면 됩니다.</p>
+      <h2>키 파일 보호</h2>
+      <p>개인키 파일은 절대 외부에 공유해서는 안 되며, 파일 권한을 <code>chmod 600</code>으로 제한해야 합니다. 가능하다면 키 생성 시 패스프레이즈를 추가로 설정해 두 단계 보호를 적용하는 것이 좋습니다.</p>
+      <h2>서버별 키 분리 관리</h2>
+      <p>여러 서버를 운영한다면 <code>~/.ssh/config</code> 파일을 활용해 서버별로 사용할 키와 접속 정보를 미리 등록해 두면 매번 옵션을 입력하지 않고도 간단히 접속할 수 있습니다.</p>
+
+        <div class="post-nav">
+          <a href="dns-record-types-explained.html" class="prev">&larr; 이전 글<span>DNS 레코드 종류와 역할 정리 (A, CNAME, MX, TXT)</span></a>
+          <a href="brute-force-protection.html" class="next">다음 글 &rarr;<span>무차별 대입 공격(Brute Force) 방어 기본 설정</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
