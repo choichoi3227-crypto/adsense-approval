@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리눅스 프로세스 관리 명령어 실전 정리 | 서버랩</title>
+<meta name="description" content="ps, top, kill 등 리눅스 프로세스를 조회하고 제어하는 핵심 명령어를 실무 중심으로 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/linux-process-management.html">
+<link rel="stylesheet" href="../style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html" class="active">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-server.html">서버 운영</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">서버 운영</span>
+          <span class="date">2026.04.20</span>
+        </div>
+        <h1>리눅스 프로세스 관리 명령어 실전 정리</h1>
+        <p class="lead">서버에서 문제가 생겼을 때 가장 먼저 확인하는 것이 프로세스 상태입니다. 몇 가지 명령어만 익혀두면 대부분의 상황을 빠르게 파악할 수 있습니다.</p>
+
+      <h2>실행 중인 프로세스 확인</h2>
+      <p><code>ps aux</code>는 현재 실행 중인 모든 프로세스를 스냅샷 형태로 출력합니다. CPU와 메모리 사용량 순으로 정렬하려면 <code>ps aux --sort=-%cpu</code> 또는 <code>ps aux --sort=-%mem</code>을 사용합니다.</p>
+      <h2>실시간 모니터링 — top과 htop</h2>
+      <p><code>top</code>은 실시간으로 프로세스 목록과 시스템 자원 사용 현황을 보여줍니다. 더 직관적인 인터페이스가 필요하다면 <code>htop</code>을 설치해 사용하면 색상 표시와 마우스 조작이 가능해 훨씬 편리합니다.</p>
+      <h2>프로세스 종료</h2>
+      <p><code>kill PID</code>는 해당 PID의 프로세스에 SIGTERM 신호를 보내 정상 종료를 요청합니다. 프로세스가 응답하지 않으면 <code>kill -9 PID</code>로 강제 종료할 수 있으나, 데이터 손실 가능성이 있으므로 최후 수단으로 사용해야 합니다.</p>
+      <p><code>pkill 프로세스명</code>은 PID 대신 프로세스 이름으로 종료 신호를 보낼 수 있어 편리합니다.</p>
+      <h2>백그라운드 실행과 작업 제어</h2>
+      <p>명령어 뒤에 <code>&amp;</code>를 붙이면 백그라운드에서 실행됩니다. <code>jobs</code>로 현재 셸의 백그라운드 작업 목록을 확인하고, <code>fg %번호</code>로 포그라운드로 가져올 수 있습니다.</p>
+      <h2>특정 포트를 점유한 프로세스 찾기</h2>
+      <pre><code>ss -tlnp | grep 8080
+# 또는
+lsof -i :8080</code></pre>
+      <p>어떤 프로세스가 특정 포트를 사용하고 있는지 파악할 때 유용합니다. 포트 충돌 문제를 디버깅할 때 가장 먼저 실행해야 할 명령입니다.</p>
+
+        <div class="post-nav">
+          <a href="server-backup-strategy.html" class="prev">&larr; 이전 글<span>소규모 서버를 위한 백업 전략 세우기</span></a>
+          <a href="cron-job-scheduling.html" class="next">다음 글 &rarr;<span>cron으로 반복 작업 자동화하기</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
