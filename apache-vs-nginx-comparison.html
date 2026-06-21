@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apache와 Nginx 차이점 비교: 어떤 웹서버를 선택할까 | 서버랩</title>
+<meta name="description" content="가장 널리 쓰이는 두 웹서버 Apache와 Nginx의 아키텍처 차이, 성능 특성, 적합한 사용 사례를 비교합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/apache-vs-nginx-comparison.html">
+<link rel="stylesheet" href="../style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html" class="active">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-server.html">서버 운영</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">서버 운영</span>
+          <span class="date">2026.05.18</span>
+        </div>
+        <h1>Apache와 Nginx 차이점 비교: 어떤 웹서버를 선택할까</h1>
+        <p class="lead">웹서버를 고를 때 Apache와 Nginx 중 어느 것이 '더 좋은가'를 묻기 전에, 어떤 상황에서 무엇이 더 적합한지를 따져야 합니다.</p>
+
+      <h2>아키텍처 차이</h2>
+      <p>Apache는 요청마다 프로세스나 스레드를 생성하는 전통적인 방식을 사용합니다. 반면 Nginx는 비동기 이벤트 기반 아키텍처로, 적은 수의 워커 프로세스가 수많은 연결을 동시에 처리합니다. 이 구조 차이가 고동시접속 상황에서 큰 성능 차이를 만들어냅니다.</p>
+      <h2>정적 파일 서비스</h2>
+      <p>Nginx는 정적 파일(이미지, CSS, JS)을 매우 효율적으로 처리합니다. 단순한 정적 파일 서비스 벤치마크에서 Apache보다 수배 높은 처리량을 보이는 경우가 많습니다.</p>
+      <h2>동적 콘텐츠와 .htaccess</h2>
+      <p>Apache는 디렉토리별 <code>.htaccess</code> 파일로 설정을 재정의할 수 있어 공유 호스팅 환경에서 유연합니다. PHP도 모듈로 직접 처리할 수 있습니다. Nginx는 <code>.htaccess</code>를 지원하지 않으며 PHP는 PHP-FPM을 통해 처리합니다.</p>
+      <h2>설정 문법 차이</h2>
+      <p>Apache는 XML과 유사한 블록 지시어(<code>&lt;VirtualHost&gt;</code> 등)를 사용하고, Nginx는 중괄호 블록과 세미콜론으로 끝나는 지시어를 사용합니다. 어느 쪽이 더 직관적인지는 개인 취향에 따라 다릅니다.</p>
+      <h2>선택 가이드</h2>
+      <ul><li><strong>Nginx 추천</strong>: 고트래픽 사이트, 리버스 프록시, 정적 파일 위주 서비스, 마이크로서비스 앞단</li><li><strong>Apache 추천</strong>: .htaccess가 필요한 환경, 기존 Apache 모듈 의존 레거시 시스템, 공유 호스팅 환경</li></ul>
+
+        <div class="post-nav">
+          <a href="linux-user-permission-management.html" class="prev">&larr; 이전 글<span>리눅스 사용자와 권한 관리 완전 정리</span></a>
+          <a href="ssl-certificate-setup-nginx.html" class="next">다음 글 &rarr;<span>Nginx에 Let's Encrypt SSL 인증서 설치하기</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
