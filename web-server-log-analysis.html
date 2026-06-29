@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소규모 서버를 위한 백업 전략 세우기 | 서버랩</title>
-<meta name="description" content="개인 프로젝트나 소규모 서비스 환경에서 현실적으로 적용 가능한 백업 원칙과 절차를 정리했습니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/server-backup-strategy.html">
+<title>Nginx/Apache 웹서버 로그 분석 기초 | 서버랩</title>
+<meta name="description" content="액세스 로그와 에러 로그를 읽고 트래픽 패턴과 문제를 파악하는 방법을 설명합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/web-server-log-analysis.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,27 +35,30 @@
         </div>
         <div class="post-meta">
           <span class="tag">서버 운영</span>
-          <span class="date">2026.02.05</span>
+          <span class="date">2026.04.30</span>
         </div>
-        <h1>소규모 서버를 위한 백업 전략 세우기</h1>
-        <p class="lead">백업은 거창한 시스템이 아니어도 됩니다. 중요한 것은 '복구해 본 적 있는 백업'을 정기적으로 만드는 것입니다.</p>
+        <h1>Nginx/Apache 웹서버 로그 분석 기초</h1>
+        <p class="lead">웹서버 로그는 서버에 무슨 일이 일어나고 있는지 알 수 있는 가장 직접적인 정보 소스입니다.</p>
 
-      <h2>3-2-1 백업 원칙</h2>
-      <p>전통적으로 권장되는 백업 원칙은 3-2-1 규칙입니다. 데이터 사본을 3개 보유하고, 서로 다른 2종류의 저장 매체에 저장하며, 그중 1개는 물리적으로 분리된 장소(또는 별도 클라우드)에 보관하는 방식입니다.</p>
-      <h2>무엇을 백업할 것인가</h2>
-      <ul><li>데이터베이스 덤프 파일</li><li>사용자 업로드 파일</li><li>애플리케이션 설정 파일 및 환경 변수</li><li>서버 설정(Nginx, systemd 유닛 등)</li></ul>
-      <h2>자동화된 백업 스크립트</h2>
-      <p>cron과 간단한 셸 스크립트만으로도 매일 새벽 데이터베이스를 덤프하고 압축한 뒤 별도 스토리지로 전송하는 자동화를 구성할 수 있습니다.</p>
-      <pre><code>#!/bin/bash
-DATE=$(date +%Y%m%d)
-mysqldump -u root mydb | gzip > /backup/mydb_$DATE.sql.gz
-find /backup -mtime +14 -delete</code></pre>
-      <h2>복구 테스트의 중요성</h2>
-      <p>백업 파일이 있다고 안심해서는 안 됩니다. 정기적으로 실제 복구 절차를 테스트해 보아야 백업이 진짜로 동작하는지 확인할 수 있습니다. 복구해 본 적 없는 백업은 백업이 아니라는 말도 있을 정도입니다.</p>
+      <h2>액세스 로그 형식 이해</h2>
+      <p>Nginx의 기본 액세스 로그는 combined 형식으로, 각 줄에 클라이언트 IP, 요청 시간, HTTP 메서드, URL, 응답 코드, 전송 바이트 수, 리퍼러, 사용자 에이전트 순서로 기록됩니다.</p>
+      <pre><code>203.0.113.5 - - [01/May/2026:09:12:33 +0900] "GET /index.html HTTP/1.1" 200 4523</code></pre>
+      <h2>자주 요청된 URL 파악</h2>
+      <pre><code>awk '{print $7}' /var/log/nginx/access.log \
+  | sort | uniq -c | sort -rn | head -20</code></pre>
+      <p>어떤 페이지가 가장 많이 요청되는지 빠르게 파악할 수 있습니다. 비정상적으로 특정 경로의 요청이 급증한다면 스캔 공격의 징후일 수 있습니다.</p>
+      <h2>HTTP 상태 코드별 집계</h2>
+      <pre><code>awk '{print $9}' /var/log/nginx/access.log \
+  | sort | uniq -c | sort -rn</code></pre>
+      <p>500 오류가 갑자기 늘었다면 애플리케이션 장애, 404가 많다면 잘못된 링크나 크롤러 스캔, 301/302가 많다면 리다이렉트 설정을 점검해야 합니다.</p>
+      <h2>에러 로그 확인</h2>
+      <p>에러 로그는 <code>/var/log/nginx/error.log</code>에서 확인합니다. <code>tail -f</code>로 실시간 모니터링하면 배포 직후 오류를 즉시 포착할 수 있습니다.</p>
+      <h2>로그 로테이션</h2>
+      <p>로그 파일은 계속 쌓이므로 logrotate를 설정해 일정 크기나 기간이 지나면 자동으로 압축·보관·삭제하도록 관리해야 합니다. Nginx는 설치 시 기본 logrotate 설정이 포함되어 있습니다.</p>
 
         <div class="post-nav">
-          <a href="linux-disk-monitoring.html" class="prev">&larr; 이전 글<span>리눅스 디스크 사용량 모니터링과 정리 방법</span></a>
-          <a href="linux-process-management.html" class="next">다음 글 &rarr;<span>리눅스 프로세스 관리 명령어 실전 정리</span></a>
+          <a href="cron-job-scheduling.html" class="prev">&larr; 이전 글<span>cron으로 반복 작업 자동화하기</span></a>
+          <a href="server-performance-tuning-basics.html" class="next">다음 글 &rarr;<span>서버 성능 튜닝 입문: 병목을 찾는 법</span></a>
         </div>
       </article>
     </div>

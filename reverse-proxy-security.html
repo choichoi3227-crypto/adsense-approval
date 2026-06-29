@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>무차별 대입 공격(Brute Force) 방어 기본 설정 | 서버랩</title>
-<meta name="description" content="반복적인 로그인 시도 공격으로부터 서버를 보호하기 위한 기본적인 방어 설정 방법을 소개합니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/brute-force-protection.html">
+<title>리버스 프록시로 서버 보안 강화하기 | 서버랩</title>
+<meta name="description" content="Nginx 리버스 프록시를 활용해 오리진 서버를 숨기고 악성 요청을 걸러내는 보안 설정 방법을 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/reverse-proxy-security.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,25 +35,33 @@
         </div>
         <div class="post-meta">
           <span class="tag">네트워크/보안</span>
-          <span class="date">2026.03.23</span>
+          <span class="date">2026.06.09</span>
         </div>
-        <h1>무차별 대입 공격(Brute Force) 방어 기본 설정</h1>
-        <p class="lead">인터넷에 연결된 서버는 등록하는 순간부터 자동화된 로그인 시도 공격의 대상이 됩니다.</p>
+        <h1>리버스 프록시로 서버 보안 강화하기</h1>
+        <p class="lead">리버스 프록시는 단순한 트래픽 분배 도구를 넘어, 서버를 외부 위협으로부터 보호하는 방어선 역할을 합니다.</p>
 
-      <h2>Fail2ban 소개</h2>
-      <p>Fail2ban은 로그 파일을 분석해 짧은 시간 안에 반복적으로 로그인에 실패한 IP를 자동으로 차단해주는 도구입니다. SSH뿐 아니라 다양한 서비스에 적용할 수 있습니다.</p>
-      <h2>기본 설치 및 설정</h2>
-      <pre><code>apt install fail2ban
-systemctl enable --now fail2ban</code></pre>
-      <p>기본 설정만으로도 SSH에 대한 무차별 대입 시도를 효과적으로 차단할 수 있으며, <code>/etc/fail2ban/jail.local</code> 파일에서 차단 기준과 시간을 세부 조정할 수 있습니다.</p>
-      <h2>추가적인 방어 방법</h2>
-      <ul><li>SSH 포트 변경으로 자동 스캔 노출 줄이기</li><li>키 기반 인증으로 전환해 비밀번호 추측 자체를 무력화</li><li>중요 서비스는 VPN 뒤에 배치해 외부 직접 접근 차단</li></ul>
-      <h2>모니터링도 함께</h2>
-      <p>차단 도구를 설정했다고 끝이 아닙니다. 정기적으로 로그를 확인해 비정상적인 접근 패턴이 없는지 살펴보는 습관이 장기적인 보안에 도움이 됩니다.</p>
+      <h2>오리진 IP 숨기기</h2>
+      <p>리버스 프록시를 앞에 두면 클라이언트는 프록시 서버의 IP만 알게 됩니다. 오리진 서버의 IP를 외부에 노출하지 않으면 직접 공격 대상이 되는 위험을 줄일 수 있습니다.</p>
+      <h2>요청 속도 제한(Rate Limiting)</h2>
+      <pre><code>limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+
+location /api/ {
+    limit_req zone=api burst=20 nodelay;
+}</code></pre>
+      <p>단일 IP가 초당 10회를 초과하는 요청을 보내면 429 오류를 반환합니다. 브루트 포스 공격과 API 남용을 효과적으로 제한합니다.</p>
+      <h2>악성 User-Agent 차단</h2>
+      <p>스캐너, 크롤러, 자동화 공격 도구들은 특정 User-Agent 문자열을 사용하는 경우가 많습니다. Nginx의 <code>map</code> 지시어로 알려진 악성 User-Agent를 차단 목록에 추가할 수 있습니다.</p>
+      <h2>보안 응답 헤더 추가</h2>
+      <pre><code>add_header X-Frame-Options SAMEORIGIN;
+add_header X-Content-Type-Options nosniff;
+add_header Referrer-Policy strict-origin-when-cross-origin;</code></pre>
+      <p>이 헤더들은 클릭재킹, MIME 스니핑, 리퍼러 정보 노출 같은 공격 유형을 브라우저 레벨에서 차단합니다.</p>
+      <h2>내부 관리 페이지 IP 제한</h2>
+      <p>어드민 페이지나 모니터링 대시보드는 특정 IP 대역에서만 접근 가능하도록 제한하는 것이 좋습니다. Nginx의 <code>allow</code>/<code>deny</code> 지시어로 간단히 설정할 수 있습니다.</p>
 
         <div class="post-nav">
-          <a href="ssh-key-management.html" class="prev">&larr; 이전 글<span>SSH 키 생성과 안전한 관리 방법</span></a>
-          <a href="vpn-vs-zero-trust.html" class="next">다음 글 &rarr;<span>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교</span></a>
+          <a href="ddos-protection-basics.html" class="prev">&larr; 이전 글<span>DDoS 공격의 원리와 기본 방어 방법</span></a>
+          <a href="ip-subnetting-basics.html" class="next">다음 글 &rarr;<span>IP 서브넷팅 기초: CIDR 표기법 이해하기</span></a>
         </div>
       </article>
     </div>

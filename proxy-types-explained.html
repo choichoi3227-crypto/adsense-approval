@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프록시 서버의 종류와 역할: 포워드, 리버스, 투명 프록시 | 서버랩</title>
+<meta name="description" content="프록시의 세 가지 주요 유형인 포워드, 리버스, 투명 프록시의 차이점과 각각 어떤 상황에서 사용하는지 설명합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/proxy-types-explained.html">
+<link rel="stylesheet" href="../style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html" class="active">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-network.html">네트워크/보안</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">네트워크/보안</span>
+          <span class="date">2026.06.16</span>
+        </div>
+        <h1>프록시 서버의 종류와 역할: 포워드, 리버스, 투명 프록시</h1>
+        <p class="lead">프록시는 단순히 중간자 역할을 한다는 공통점이 있지만, 누구를 위해 어떤 방향으로 동작하느냐에 따라 종류가 나뉩니다.</p>
+
+      <h2>포워드 프록시 — 클라이언트를 대신해 요청</h2>
+      <p>포워드 프록시는 클라이언트(내부 사용자) 요청을 대신해 외부 서버에 접속합니다. 기업 환경에서 직원들의 인터넷 접근을 모니터링하거나, 특정 사이트를 차단하거나, 캐싱으로 대역폭을 절약하는 데 사용합니다. VPN의 일부 기능과 비슷합니다.</p>
+      <h2>리버스 프록시 — 서버를 대신해 응답</h2>
+      <p>리버스 프록시는 클라이언트 요청을 받아 내부 서버로 전달합니다. 클라이언트는 실제 서버의 존재를 알 수 없습니다. Nginx를 앞에 두고 여러 애플리케이션 서버로 트래픽을 분산하는 것이 대표적인 사용 사례입니다. 로드 밸런싱, SSL 종료, 캐싱도 이 계층에서 처리합니다.</p>
+      <h2>투명 프록시</h2>
+      <p>투명 프록시는 클라이언트 설정 변경 없이 네트워크 레벨에서 자동으로 트래픽을 가로채 처리합니다. ISP나 기업 네트워크에서 사용자 모르게 캐싱이나 필터링을 적용할 때 사용합니다.</p>
+      <h2>프록시와 VPN의 차이</h2>
+      <p>프록시는 특정 애플리케이션 트래픽만 중계하는 경우가 많고, VPN은 기기 전체의 네트워크 트래픽을 암호화 터널로 라우팅합니다. 보안 수준과 적용 범위에서 차이가 있습니다.</p>
+      <h2>Cloudflare Tunnel 활용</h2>
+      <p>Cloudflare Tunnel은 서버의 방화벽 포트를 열지 않고도 내부 서비스를 외부에 안전하게 노출할 수 있는 현대적인 솔루션입니다. 서버에서 Cloudflare로 아웃바운드 터널만 열면 Cloudflare가 인바운드를 처리합니다.</p>
+
+        <div class="post-nav">
+          <a href="tcp-udp-difference.html" class="prev">&larr; 이전 글<span>TCP와 UDP의 차이점과 선택 기준</span></a>
+          <a href="http-status-codes-guide.html" class="next">다음 글 &rarr;<span>HTTP 상태 코드 완전 정리: 1xx부터 5xx까지</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>

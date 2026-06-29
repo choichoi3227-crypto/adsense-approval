@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>무차별 대입 공격(Brute Force) 방어 기본 설정 | 서버랩</title>
-<meta name="description" content="반복적인 로그인 시도 공격으로부터 서버를 보호하기 위한 기본적인 방어 설정 방법을 소개합니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/brute-force-protection.html">
+<title>리눅스 네트워크 상태 진단 명령어 모음 | 서버랩</title>
+<meta name="description" content="네트워크 연결 확인, 포트 스캔, 트래픽 분석에 쓰이는 실무 필수 명령어들을 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/network-monitoring-tools.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,25 +35,28 @@
         </div>
         <div class="post-meta">
           <span class="tag">네트워크/보안</span>
-          <span class="date">2026.03.23</span>
+          <span class="date">2026.06.03</span>
         </div>
-        <h1>무차별 대입 공격(Brute Force) 방어 기본 설정</h1>
-        <p class="lead">인터넷에 연결된 서버는 등록하는 순간부터 자동화된 로그인 시도 공격의 대상이 됩니다.</p>
+        <h1>리눅스 네트워크 상태 진단 명령어 모음</h1>
+        <p class="lead">네트워크 문제를 만났을 때 어디서부터 확인해야 할지 막막하다면, 기본 명령어 몇 가지만 순서대로 실행해 보세요.</p>
 
-      <h2>Fail2ban 소개</h2>
-      <p>Fail2ban은 로그 파일을 분석해 짧은 시간 안에 반복적으로 로그인에 실패한 IP를 자동으로 차단해주는 도구입니다. SSH뿐 아니라 다양한 서비스에 적용할 수 있습니다.</p>
-      <h2>기본 설치 및 설정</h2>
-      <pre><code>apt install fail2ban
-systemctl enable --now fail2ban</code></pre>
-      <p>기본 설정만으로도 SSH에 대한 무차별 대입 시도를 효과적으로 차단할 수 있으며, <code>/etc/fail2ban/jail.local</code> 파일에서 차단 기준과 시간을 세부 조정할 수 있습니다.</p>
-      <h2>추가적인 방어 방법</h2>
-      <ul><li>SSH 포트 변경으로 자동 스캔 노출 줄이기</li><li>키 기반 인증으로 전환해 비밀번호 추측 자체를 무력화</li><li>중요 서비스는 VPN 뒤에 배치해 외부 직접 접근 차단</li></ul>
-      <h2>모니터링도 함께</h2>
-      <p>차단 도구를 설정했다고 끝이 아닙니다. 정기적으로 로그를 확인해 비정상적인 접근 패턴이 없는지 살펴보는 습관이 장기적인 보안에 도움이 됩니다.</p>
+      <h2>연결 상태 확인 — ss와 netstat</h2>
+      <p><code>ss -tlnp</code>는 현재 수신 대기(Listen) 중인 TCP 포트와 연결된 프로세스를 보여줍니다. <code>netstat</code>의 현대적 대체 명령어로, 더 빠르고 상세한 정보를 제공합니다.</p>
+      <h2>경로 추적 — traceroute와 mtr</h2>
+      <p><code>traceroute 목적지</code>는 패킷이 목적지까지 거치는 라우터 경로를 추적합니다. <code>mtr</code>은 traceroute와 ping을 합친 도구로 각 홉의 패킷 손실률과 지연 시간을 실시간으로 보여줍니다.</p>
+      <h2>DNS 조회 — dig와 nslookup</h2>
+      <pre><code>dig example.com A
+dig @8.8.8.8 example.com MX</code></pre>
+      <p><code>dig</code>는 DNS 레코드를 상세히 조회할 수 있습니다. <code>@서버</code>로 조회할 DNS 서버를 지정할 수 있어, 설정한 DNS와 공개 DNS의 응답을 비교할 때 유용합니다.</p>
+      <h2>패킷 캡처 — tcpdump</h2>
+      <pre><code>tcpdump -i eth0 port 80 -w capture.pcap</code></pre>
+      <p>특정 인터페이스와 포트의 패킷을 캡처해 파일로 저장합니다. Wireshark로 열어 상세 분석할 수 있습니다. 문제 재현이 어려운 간헐적 네트워크 오류를 잡을 때 특히 유용합니다.</p>
+      <h2>대역폭 측정 — iperf3</h2>
+      <p><code>iperf3</code>는 서버-클라이언트 쌍으로 실제 네트워크 처리량을 측정합니다. 서버 간 네트워크 성능을 검증하거나 병목 지점을 찾을 때 사용합니다.</p>
 
         <div class="post-nav">
-          <a href="ssh-key-management.html" class="prev">&larr; 이전 글<span>SSH 키 생성과 안전한 관리 방법</span></a>
-          <a href="vpn-vs-zero-trust.html" class="next">다음 글 &rarr;<span>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교</span></a>
+          <a href="load-balancer-types.html" class="prev">&larr; 이전 글<span>로드 밸런서 종류와 동작 방식 정리</span></a>
+          <a href="ddos-protection-basics.html" class="next">다음 글 &rarr;<span>DDoS 공격의 원리와 기본 방어 방법</span></a>
         </div>
       </article>
     </div>

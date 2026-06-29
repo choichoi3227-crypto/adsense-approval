@@ -29,4 +29,44 @@
   <url><loc>https://example-serverlab.pages.dev/posts/infrastructure-as-code-intro.html</loc></url>
   <url><loc>https://example-serverlab.pages.dev/posts/monitoring-and-alerting-basics.html</loc></url>
   <url><loc>https://example-serverlab.pages.dev/posts/git-branch-strategy.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/linux-process-management.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cron-job-scheduling.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/web-server-log-analysis.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/server-performance-tuning-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/swap-memory-explained.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cloudflare-pages-deploy-guide.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/aws-s3-static-hosting.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cloud-cost-optimization.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/multi-region-deployment-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cloudflare-r2-vs-s3.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/vpn-vs-zero-trust.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/load-balancer-types.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/network-monitoring-tools.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/ddos-protection-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/reverse-proxy-security.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/docker-compose-guide.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/github-actions-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/kubernetes-concepts-intro.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/ansible-automation-intro.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/log-centralization-elk.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/linux-user-permission-management.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/apache-vs-nginx-comparison.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/ssl-certificate-setup-nginx.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/server-hardening-checklist.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/mysql-basic-operations.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/vpc-network-design-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/container-registry-guide.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cloud-database-options.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/auto-scaling-concepts.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/iac-terraform-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/ip-subnetting-basics.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/tcp-udp-difference.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/proxy-types-explained.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/http-status-codes-guide.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/cloudflare-waf-setup.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/helm-kubernetes-package-manager.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/container-security-best-practices.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/blue-green-deployment.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/secret-management-in-devops.html</loc></url>
+  <url><loc>https://example-serverlab.pages.dev/posts/observability-three-pillars.html</loc></url>
 </urlset>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP 상태 코드 완전 정리: 1xx부터 5xx까지 | 서버랩</title>
+<meta name="description" content="웹 개발과 서버 운영에서 매일 마주치는 HTTP 상태 코드의 의미와 각 코드가 발생하는 원인을 정리했습니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/http-status-codes-guide.html">
+<link rel="stylesheet" href="../style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="../index.html" class="logo">서버랩<span>.</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+        <a href="../category-server.html">서버 운영</a>
+        <a href="../category-cloud.html">클라우드 인프라</a>
+        <a href="../category-network.html" class="active">네트워크/보안</a>
+        <a href="../category-devops.html">데브옵스</a>
+        <a href="../about.html">소개</a>
+        <a href="../contact.html">문의</a>
+      </nav>
+      <button class="menu-toggle" aria-label="메뉴 열기">메뉴</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="post">
+        <div class="breadcrumb">
+          <a href="../index.html">홈</a> / <a href="../category-network.html">네트워크/보안</a>
+        </div>
+        <div class="post-meta">
+          <span class="tag">네트워크/보안</span>
+          <span class="date">2026.06.18</span>
+        </div>
+        <h1>HTTP 상태 코드 완전 정리: 1xx부터 5xx까지</h1>
+        <p class="lead">상태 코드 숫자만 봐도 어디서 무슨 문제가 생겼는지 파악할 수 있다면 디버깅 속도가 크게 달라집니다.</p>
+
+      <h2>2xx — 성공</h2>
+      <table><tr><th>코드</th><th>의미</th></tr><tr><td>200 OK</td><td>요청 성공</td></tr><tr><td>201 Created</td><td>리소스 생성 성공 (POST)</td></tr><tr><td>204 No Content</td><td>성공했지만 응답 본문 없음 (DELETE)</td></tr></table>
+      <h2>3xx — 리다이렉트</h2>
+      <table><tr><th>코드</th><th>의미</th></tr><tr><td>301 Moved Permanently</td><td>영구 이동. 검색엔진이 새 URL을 기억</td></tr><tr><td>302 Found</td><td>임시 이동. 검색엔진은 원래 URL 유지</td></tr><tr><td>304 Not Modified</td><td>캐시된 버전 사용 가능. 재다운로드 불필요</td></tr></table>
+      <h2>4xx — 클라이언트 오류</h2>
+      <table><tr><th>코드</th><th>의미</th></tr><tr><td>400 Bad Request</td><td>잘못된 요청 형식</td></tr><tr><td>401 Unauthorized</td><td>인증 필요</td></tr><tr><td>403 Forbidden</td><td>권한 없음 (인증과 무관)</td></tr><tr><td>404 Not Found</td><td>리소스 없음</td></tr><tr><td>429 Too Many Requests</td><td>요청 빈도 초과</td></tr></table>
+      <h2>5xx — 서버 오류</h2>
+      <table><tr><th>코드</th><th>의미</th></tr><tr><td>500 Internal Server Error</td><td>서버 내부 오류 (가장 흔한 서버 오류)</td></tr><tr><td>502 Bad Gateway</td><td>프록시가 백엔드로부터 잘못된 응답 수신</td></tr><tr><td>503 Service Unavailable</td><td>서버 과부하 또는 점검 중</td></tr><tr><td>504 Gateway Timeout</td><td>프록시가 백엔드 응답 대기 시간 초과</td></tr></table>
+      <h2>운영 관점에서 주목할 코드</h2>
+      <ul><li><strong>502/504 급증</strong>: 백엔드 서버 문제 또는 타임아웃 설정 검토 필요</li><li><strong>429 증가</strong>: 비정상 트래픽 또는 rate limit 정책 조정 필요</li><li><strong>301 vs 302</strong>: SEO에 영향을 주므로 의도에 맞는 코드 사용 중요</li></ul>
+
+        <div class="post-nav">
+          <a href="proxy-types-explained.html" class="prev">&larr; 이전 글<span>프록시 서버의 종류와 역할: 포워드, 리버스, 투명 프록시</span></a>
+          <a href="cloudflare-waf-setup.html" class="next">다음 글 &rarr;<span>Cloudflare WAF로 웹 애플리케이션 보안 강화하기</span></a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>서버랩</h4>
+          <a href="../about.html">소개</a>
+          <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-col">
+          <h4>카테고리</h4>
+          <a href="../category-server.html">서버 운영</a>
+          <a href="../category-cloud.html">클라우드 인프라</a>
+          <a href="../category-network.html">네트워크/보안</a>
+          <a href="../category-devops.html">데브옵스</a>
+        </div>
+        <div class="footer-col">
+          <h4>정책</h4>
+          <a href="../privacy-policy.html">개인정보처리방침</a>
+          <a href="../disclaimer.html">면책조항</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 서버랩. All rights reserved.</span>
+        <span>서버 운영, 클라우드 인프라, 네트워크 보안, 데브옵스에 대한 실무 정보를 다루는 기술 블로그입니다.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>

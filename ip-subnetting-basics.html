@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>무차별 대입 공격(Brute Force) 방어 기본 설정 | 서버랩</title>
-<meta name="description" content="반복적인 로그인 시도 공격으로부터 서버를 보호하기 위한 기본적인 방어 설정 방법을 소개합니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/brute-force-protection.html">
+<title>IP 서브넷팅 기초: CIDR 표기법 이해하기 | 서버랩</title>
+<meta name="description" content="서버 환경에서 자주 보이는 CIDR 표기법과 서브넷 마스크의 의미, 네트워크 범위 계산 방법을 설명합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/ip-subnetting-basics.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,25 +35,25 @@
         </div>
         <div class="post-meta">
           <span class="tag">네트워크/보안</span>
-          <span class="date">2026.03.23</span>
+          <span class="date">2026.06.12</span>
         </div>
-        <h1>무차별 대입 공격(Brute Force) 방어 기본 설정</h1>
-        <p class="lead">인터넷에 연결된 서버는 등록하는 순간부터 자동화된 로그인 시도 공격의 대상이 됩니다.</p>
+        <h1>IP 서브넷팅 기초: CIDR 표기법 이해하기</h1>
+        <p class="lead">10.0.0.0/16, 192.168.1.0/24처럼 슬래시가 붙은 IP 표기법, 처음에는 낯설지만 규칙을 알면 금방 읽히기 시작합니다.</p>
 
-      <h2>Fail2ban 소개</h2>
-      <p>Fail2ban은 로그 파일을 분석해 짧은 시간 안에 반복적으로 로그인에 실패한 IP를 자동으로 차단해주는 도구입니다. SSH뿐 아니라 다양한 서비스에 적용할 수 있습니다.</p>
-      <h2>기본 설치 및 설정</h2>
-      <pre><code>apt install fail2ban
-systemctl enable --now fail2ban</code></pre>
-      <p>기본 설정만으로도 SSH에 대한 무차별 대입 시도를 효과적으로 차단할 수 있으며, <code>/etc/fail2ban/jail.local</code> 파일에서 차단 기준과 시간을 세부 조정할 수 있습니다.</p>
-      <h2>추가적인 방어 방법</h2>
-      <ul><li>SSH 포트 변경으로 자동 스캔 노출 줄이기</li><li>키 기반 인증으로 전환해 비밀번호 추측 자체를 무력화</li><li>중요 서비스는 VPN 뒤에 배치해 외부 직접 접근 차단</li></ul>
-      <h2>모니터링도 함께</h2>
-      <p>차단 도구를 설정했다고 끝이 아닙니다. 정기적으로 로그를 확인해 비정상적인 접근 패턴이 없는지 살펴보는 습관이 장기적인 보안에 도움이 됩니다.</p>
+      <h2>IP 주소의 구조</h2>
+      <p>IPv4 주소는 32비트로 구성된 4개의 8비트 숫자 묶음입니다. 예를 들어 <code>192.168.1.100</code>은 <code>11000000.10101000.00000001.01100100</code>을 점으로 구분한 표현입니다.</p>
+      <h2>CIDR 표기법</h2>
+      <p>CIDR(Classless Inter-Domain Routing)에서 <code>/24</code>는 앞에서 24비트가 네트워크 부분이고 나머지 8비트가 호스트 부분이라는 의미입니다. <code>192.168.1.0/24</code>는 <code>192.168.1.0</code>부터 <code>192.168.1.255</code>까지 256개의 IP를 포함합니다.</p>
+      <h2>자주 사용하는 서브넷 범위</h2>
+      <table><tr><th>CIDR</th><th>호스트 수</th><th>용도</th></tr><tr><td>/32</td><td>1</td><td>단일 호스트 지정</td></tr><tr><td>/24</td><td>256</td><td>소규모 네트워크</td></tr><tr><td>/16</td><td>65,536</td><td>VPC 전체 범위</td></tr><tr><td>/8</td><td>16,777,216</td><td>대규모 사설망</td></tr></table>
+      <h2>사설 IP 대역</h2>
+      <p>인터넷에서 직접 사용하지 않는 사설 IP 대역이 정해져 있습니다. <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>이 대표적이며, VPC나 내부 네트워크 설계 시 이 범위 안에서 사용합니다.</p>
+      <h2>클라우드 VPC 설계 예시</h2>
+      <p>VPC 전체를 <code>10.0.0.0/16</code>으로 잡고, 퍼블릭 서브넷은 <code>10.0.1.0/24</code>, 프라이빗 서브넷은 <code>10.0.2.0/24</code>로 나누는 것이 일반적인 소규모 VPC 구성입니다.</p>
 
         <div class="post-nav">
-          <a href="ssh-key-management.html" class="prev">&larr; 이전 글<span>SSH 키 생성과 안전한 관리 방법</span></a>
-          <a href="vpn-vs-zero-trust.html" class="next">다음 글 &rarr;<span>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교</span></a>
+          <a href="reverse-proxy-security.html" class="prev">&larr; 이전 글<span>리버스 프록시로 서버 보안 강화하기</span></a>
+          <a href="tcp-udp-difference.html" class="next">다음 글 &rarr;<span>TCP와 UDP의 차이점과 선택 기준</span></a>
         </div>
       </article>
     </div>

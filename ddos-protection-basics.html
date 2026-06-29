@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>무차별 대입 공격(Brute Force) 방어 기본 설정 | 서버랩</title>
-<meta name="description" content="반복적인 로그인 시도 공격으로부터 서버를 보호하기 위한 기본적인 방어 설정 방법을 소개합니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/brute-force-protection.html">
+<title>DDoS 공격의 원리와 기본 방어 방법 | 서버랩</title>
+<meta name="description" content="분산 서비스 거부 공격의 주요 유형과 소규모 서비스에서 적용할 수 있는 현실적인 방어 수단을 소개합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/ddos-protection-basics.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,25 +35,25 @@
         </div>
         <div class="post-meta">
           <span class="tag">네트워크/보안</span>
-          <span class="date">2026.03.23</span>
+          <span class="date">2026.06.06</span>
         </div>
-        <h1>무차별 대입 공격(Brute Force) 방어 기본 설정</h1>
-        <p class="lead">인터넷에 연결된 서버는 등록하는 순간부터 자동화된 로그인 시도 공격의 대상이 됩니다.</p>
+        <h1>DDoS 공격의 원리와 기본 방어 방법</h1>
+        <p class="lead">DDoS는 대형 서비스만의 문제가 아닙니다. 누구나 표적이 될 수 있고, 기본적인 방어는 충분히 준비할 수 있습니다.</p>
 
-      <h2>Fail2ban 소개</h2>
-      <p>Fail2ban은 로그 파일을 분석해 짧은 시간 안에 반복적으로 로그인에 실패한 IP를 자동으로 차단해주는 도구입니다. SSH뿐 아니라 다양한 서비스에 적용할 수 있습니다.</p>
-      <h2>기본 설치 및 설정</h2>
-      <pre><code>apt install fail2ban
-systemctl enable --now fail2ban</code></pre>
-      <p>기본 설정만으로도 SSH에 대한 무차별 대입 시도를 효과적으로 차단할 수 있으며, <code>/etc/fail2ban/jail.local</code> 파일에서 차단 기준과 시간을 세부 조정할 수 있습니다.</p>
-      <h2>추가적인 방어 방법</h2>
-      <ul><li>SSH 포트 변경으로 자동 스캔 노출 줄이기</li><li>키 기반 인증으로 전환해 비밀번호 추측 자체를 무력화</li><li>중요 서비스는 VPN 뒤에 배치해 외부 직접 접근 차단</li></ul>
-      <h2>모니터링도 함께</h2>
-      <p>차단 도구를 설정했다고 끝이 아닙니다. 정기적으로 로그를 확인해 비정상적인 접근 패턴이 없는지 살펴보는 습관이 장기적인 보안에 도움이 됩니다.</p>
+      <h2>DDoS 공격의 원리</h2>
+      <p>DDoS(분산 서비스 거부)는 수많은 출처에서 동시에 대량의 트래픽을 서버에 보내 정상 사용자의 요청을 처리하지 못하게 만드는 공격입니다. 봇넷(악성코드에 감염된 수천~수만 대의 기기)을 이용하는 것이 일반적입니다.</p>
+      <h2>주요 공격 유형</h2>
+      <ul><li><strong>볼류메트릭 공격</strong>: UDP/ICMP 플러드처럼 대역폭을 가득 채우는 방식</li><li><strong>프로토콜 공격</strong>: SYN 플러드처럼 서버의 연결 상태 테이블을 고갈시키는 방식</li><li><strong>애플리케이션 레이어 공격</strong>: HTTP GET/POST 플러드처럼 정상 요청처럼 보이도록 위장하는 방식</li></ul>
+      <h2>Cloudflare를 통한 방어</h2>
+      <p>Cloudflare 같은 CDN/보안 서비스를 앞에 두면 오리진 서버의 실제 IP가 숨겨지고, Cloudflare가 공격 트래픽을 흡수·차단합니다. 무료 플랜에서도 기본적인 DDoS 방어가 제공됩니다.</p>
+      <h2>서버 단의 기본 대응</h2>
+      <ul><li>rate limiting으로 단일 IP의 요청 수 제한</li><li>SYN 쿠키 활성화로 SYN 플러드 완화</li><li>불필요한 UDP 서비스 비활성화</li><li>업스트림 ISP에 블랙홀 라우팅 요청</li></ul>
+      <h2>사전 준비의 중요성</h2>
+      <p>공격이 시작된 후에 대응 방법을 찾는 것은 늦습니다. 미리 CDN을 도입하고, 긴급 연락처와 대응 절차를 문서화해두는 것이 피해를 최소화하는 가장 확실한 방법입니다.</p>
 
         <div class="post-nav">
-          <a href="ssh-key-management.html" class="prev">&larr; 이전 글<span>SSH 키 생성과 안전한 관리 방법</span></a>
-          <a href="vpn-vs-zero-trust.html" class="next">다음 글 &rarr;<span>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교</span></a>
+          <a href="network-monitoring-tools.html" class="prev">&larr; 이전 글<span>리눅스 네트워크 상태 진단 명령어 모음</span></a>
+          <a href="reverse-proxy-security.html" class="next">다음 글 &rarr;<span>리버스 프록시로 서버 보안 강화하기</span></a>
         </div>
       </article>
     </div>

@@ -7,7 +7,8 @@
 <meta name="description" content="AWS, GCP, Cloudflare 등 클라우드 활용 관련 글 모음입니다.">
 <link rel="canonical" href="https://example-serverlab.pages.dev/category-cloud.html">
 <link rel="stylesheet" href="style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543" crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
+     crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="site-header">
@@ -39,7 +40,107 @@
           <span class="tag">클라우드 인프라</span>
         </div>
         <div class="content-col">
-          <h3><a href="serverless-vs-traditional-server.html">서버리스 아키텍처, 언제 도입해야 할까</a></h3>
+          <h3><a href="posts/iac-terraform-basics.html">Terraform으로 클라우드 인프라 코드로 관리하기</a></h3>
+          <p>Terraform의 기본 개념과 워크플로를 익히고, AWS EC2 인스턴스를 코드로 프로비저닝하는 실습 예제를 설명합니다.</p>
+          <span class="date">2026.06.10</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/auto-scaling-concepts.html">오토 스케일링 개념과 설정 기본</a></h3>
+          <p>트래픽 변화에 따라 서버 수를 자동으로 조절하는 오토 스케일링의 작동 원리와 설정 전략을 설명합니다.</p>
+          <span class="date">2026.06.07</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/cloud-database-options.html">클라우드 관리형 데이터베이스 서비스 비교</a></h3>
+          <p>RDS, Cloud SQL, PlanetScale 등 직접 DB 서버를 운영하지 않아도 되는 관리형 데이터베이스 서비스들의 특징을 비교합니다.</p>
+          <span class="date">2026.06.04</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/container-registry-guide.html">컨테이너 레지스트리 사용법: Docker Hub, ECR, GHCR 비교</a></h3>
+          <p>빌드한 Docker 이미지를 저장하고 배포하기 위한 컨테이너 레지스트리 선택과 사용법을 정리합니다.</p>
+          <span class="date">2026.06.01</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/vpc-network-design-basics.html">VPC 네트워크 설계 기초: 서브넷과 라우팅 이해하기</a></h3>
+          <p>클라우드 VPC 환경에서 퍼블릭/프라이빗 서브넷을 나누고 라우팅 테이블을 구성하는 기본 개념을 설명합니다.</p>
+          <span class="date">2026.05.29</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/cloudflare-r2-vs-s3.html">Cloudflare R2 vs AWS S3: 오브젝트 스토리지 비교</a></h3>
+          <p>이그레스 비용 없는 R2와 S3의 차이점, 그리고 어떤 상황에서 각각이 유리한지 비교 분석합니다.</p>
+          <span class="date">2026.05.25</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/multi-region-deployment-basics.html">멀티 리전 배포의 개념과 고려사항</a></h3>
+          <p>애플리케이션을 여러 리전에 배포해 가용성과 레이턴시를 높이는 전략의 기본 개념을 설명합니다.</p>
+          <span class="date">2026.05.22</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/cloud-cost-optimization.html">클라우드 비용 절감을 위한 기본 전략</a></h3>
+          <p>클라우드 청구서를 보고 놀라지 않으려면 알아야 할 기본적인 비용 최적화 원칙들을 정리했습니다.</p>
+          <span class="date">2026.05.19</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/aws-s3-static-hosting.html">AWS S3로 정적 웹사이트 호스팅하기</a></h3>
+          <p>S3 버킷을 웹 호스팅 용도로 설정하고 CloudFront와 연동해 HTTPS와 CDN을 적용하는 방법을 설명합니다.</p>
+          <span class="date">2026.05.16</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/cloudflare-pages-deploy-guide.html">Cloudflare Pages로 정적 사이트 배포하기</a></h3>
+          <p>Git 저장소 연동부터 커스텀 도메인 설정까지, Cloudflare Pages 배포 전 과정을 단계별로 설명합니다.</p>
+          <span class="date">2026.05.13</span>
+        </div>
+      </div>
+      <div class="post-row">
+        <div class="meta-col">
+          <span class="tag">클라우드 인프라</span>
+        </div>
+        <div class="content-col">
+          <h3><a href="posts/serverless-vs-traditional-server.html">서버리스 아키텍처, 언제 도입해야 할까</a></h3>
           <p>전통적인 서버 운영 방식과 서버리스 아키텍처의 장단점을 비교하고 적합한 상황을 짚어봅니다.</p>
           <span class="date">2026.02.27</span>
         </div>
@@ -49,7 +150,7 @@
           <span class="tag">클라우드 인프라</span>
         </div>
         <div class="content-col">
-          <h3><a href="object-storage-vs-block-storage.html">오브젝트 스토리지와 블록 스토리지의 차이</a></h3>
+          <h3><a href="posts/object-storage-vs-block-storage.html">오브젝트 스토리지와 블록 스토리지의 차이</a></h3>
           <p>클라우드 환경에서 자주 등장하는 두 가지 스토리지 방식의 구조적 차이와 활용 분야를 정리합니다.</p>
           <span class="date">2026.02.23</span>
         </div>
@@ -59,7 +160,7 @@
           <span class="tag">클라우드 인프라</span>
         </div>
         <div class="content-col">
-          <h3><a href="cdn-basics-explained.html">CDN의 작동 원리와 도입 효과</a></h3>
+          <h3><a href="posts/cdn-basics-explained.html">CDN의 작동 원리와 도입 효과</a></h3>
           <p>콘텐츠 전송 네트워크(CDN)가 웹사이트 속도와 안정성에 어떤 영향을 주는지 기본 원리부터 설명합니다.</p>
           <span class="date">2026.02.18</span>
         </div>
@@ -69,7 +170,7 @@
           <span class="tag">클라우드 인프라</span>
         </div>
         <div class="content-col">
-          <h3><a href="aws-vs-gcp-vs-cloudflare.html">AWS, GCP, Cloudflare 클라우드 플랫폼 특징 비교</a></h3>
+          <h3><a href="posts/aws-vs-gcp-vs-cloudflare.html">AWS, GCP, Cloudflare 클라우드 플랫폼 특징 비교</a></h3>
           <p>대표적인 세 클라우드 플랫폼의 강점과 적합한 사용 사례를 비교 정리했습니다.</p>
           <span class="date">2026.02.13</span>
         </div>
@@ -79,7 +180,7 @@
           <span class="tag">클라우드 인프라</span>
         </div>
         <div class="content-col">
-          <h3><a href="cloudflare-workers-intro.html">Cloudflare Workers 입문: 서버리스 엣지 컴퓨팅 이해하기</a></h3>
+          <h3><a href="posts/cloudflare-workers-intro.html">Cloudflare Workers 입문: 서버리스 엣지 컴퓨팅 이해하기</a></h3>
           <p>별도의 서버 없이 전 세계 엣지 네트워크에서 코드를 실행하는 Cloudflare Workers의 기본 개념을 소개합니다.</p>
           <span class="date">2026.02.09</span>
         </div>

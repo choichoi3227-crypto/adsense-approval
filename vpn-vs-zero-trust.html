@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>무차별 대입 공격(Brute Force) 방어 기본 설정 | 서버랩</title>
-<meta name="description" content="반복적인 로그인 시도 공격으로부터 서버를 보호하기 위한 기본적인 방어 설정 방법을 소개합니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/brute-force-protection.html">
+<title>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교 | 서버랩</title>
+<meta name="description" content="전통적인 VPN 기반 접근 제어와 제로 트러스트 아키텍처의 차이점 및 도입 고려사항을 설명합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/vpn-vs-zero-trust.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,25 +35,25 @@
         </div>
         <div class="post-meta">
           <span class="tag">네트워크/보안</span>
-          <span class="date">2026.03.23</span>
+          <span class="date">2026.05.28</span>
         </div>
-        <h1>무차별 대입 공격(Brute Force) 방어 기본 설정</h1>
-        <p class="lead">인터넷에 연결된 서버는 등록하는 순간부터 자동화된 로그인 시도 공격의 대상이 됩니다.</p>
+        <h1>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교</h1>
+        <p class="lead">원격 근무가 일상이 된 지금, '내부 네트워크라서 안전하다'는 가정이 무너지고 있습니다.</p>
 
-      <h2>Fail2ban 소개</h2>
-      <p>Fail2ban은 로그 파일을 분석해 짧은 시간 안에 반복적으로 로그인에 실패한 IP를 자동으로 차단해주는 도구입니다. SSH뿐 아니라 다양한 서비스에 적용할 수 있습니다.</p>
-      <h2>기본 설치 및 설정</h2>
-      <pre><code>apt install fail2ban
-systemctl enable --now fail2ban</code></pre>
-      <p>기본 설정만으로도 SSH에 대한 무차별 대입 시도를 효과적으로 차단할 수 있으며, <code>/etc/fail2ban/jail.local</code> 파일에서 차단 기준과 시간을 세부 조정할 수 있습니다.</p>
-      <h2>추가적인 방어 방법</h2>
-      <ul><li>SSH 포트 변경으로 자동 스캔 노출 줄이기</li><li>키 기반 인증으로 전환해 비밀번호 추측 자체를 무력화</li><li>중요 서비스는 VPN 뒤에 배치해 외부 직접 접근 차단</li></ul>
-      <h2>모니터링도 함께</h2>
-      <p>차단 도구를 설정했다고 끝이 아닙니다. 정기적으로 로그를 확인해 비정상적인 접근 패턴이 없는지 살펴보는 습관이 장기적인 보안에 도움이 됩니다.</p>
+      <h2>전통적 VPN의 한계</h2>
+      <p>기존 VPN은 '내부 네트워크에 접속했으면 신뢰할 수 있다'는 경계 기반 보안 모델입니다. VPN 자격증명이 탈취되면 내부 네트워크 전체가 노출되고, 과도한 권한 부여와 이동 경로 추적이 어렵다는 문제도 있습니다.</p>
+      <h2>제로 트러스트 원칙</h2>
+      <p>제로 트러스트는 '절대 신뢰하지 말고, 항상 검증하라(Never Trust, Always Verify)'는 원칙 위에 구축됩니다. 내부망에 있더라도 모든 접근 요청을 사용자, 기기, 컨텍스트 기반으로 검증하고 최소 권한만 부여합니다.</p>
+      <h2>핵심 구성 요소</h2>
+      <ul><li>강력한 ID 검증(MFA, SSO)</li><li>기기 상태 검사(패치 수준, 인증서)</li><li>최소 권한 원칙에 따른 세분화된 접근 제어</li><li>모든 접근 로그의 지속적 모니터링</li></ul>
+      <h2>대표 솔루션</h2>
+      <p>Cloudflare Access, Google BeyondCorp, Zscaler 등이 클라우드 기반 제로 트러스트 솔루션의 대표 사례입니다. 소규모 팀이라면 Cloudflare Tunnel과 Access의 무료 플랜으로 시작해볼 수 있습니다.</p>
+      <h2>전환 전략</h2>
+      <p>VPN에서 제로 트러스트로 전환은 한 번에 이루어지지 않습니다. 중요 애플리케이션부터 먼저 적용하고, 점진적으로 범위를 넓히는 단계적 접근이 현실적입니다.</p>
 
         <div class="post-nav">
-          <a href="ssh-key-management.html" class="prev">&larr; 이전 글<span>SSH 키 생성과 안전한 관리 방법</span></a>
-          <a href="vpn-vs-zero-trust.html" class="next">다음 글 &rarr;<span>기업 VPN과 제로 트러스트 네트워크 접근 방식 비교</span></a>
+          <a href="brute-force-protection.html" class="prev">&larr; 이전 글<span>무차별 대입 공격(Brute Force) 방어 기본 설정</span></a>
+          <a href="load-balancer-types.html" class="next">다음 글 &rarr;<span>로드 밸런서 종류와 동작 방식 정리</span></a>
         </div>
       </article>
     </div>

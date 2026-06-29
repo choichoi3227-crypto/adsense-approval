@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소규모 서버를 위한 백업 전략 세우기 | 서버랩</title>
-<meta name="description" content="개인 프로젝트나 소규모 서비스 환경에서 현실적으로 적용 가능한 백업 원칙과 절차를 정리했습니다.">
-<link rel="canonical" href="https://example-serverlab.pages.dev/posts/server-backup-strategy.html">
+<title>cron으로 반복 작업 자동화하기 | 서버랩</title>
+<meta name="description" content="리눅스에서 정기 작업을 예약 실행하는 cron의 문법과 실무 활용 패턴을 설명합니다.">
+<link rel="canonical" href="https://example-serverlab.pages.dev/posts/cron-job-scheduling.html">
 <link rel="stylesheet" href="../style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5852370252252543"
      crossorigin="anonymous"></script>
@@ -35,27 +35,31 @@
         </div>
         <div class="post-meta">
           <span class="tag">서버 운영</span>
-          <span class="date">2026.02.05</span>
+          <span class="date">2026.04.25</span>
         </div>
-        <h1>소규모 서버를 위한 백업 전략 세우기</h1>
-        <p class="lead">백업은 거창한 시스템이 아니어도 됩니다. 중요한 것은 '복구해 본 적 있는 백업'을 정기적으로 만드는 것입니다.</p>
+        <h1>cron으로 반복 작업 자동화하기</h1>
+        <p class="lead">로그 정리, 백업, 헬스 체크처럼 주기적으로 반복해야 하는 작업을 cron에 맡기면 사람이 직접 실행하지 않아도 됩니다.</p>
 
-      <h2>3-2-1 백업 원칙</h2>
-      <p>전통적으로 권장되는 백업 원칙은 3-2-1 규칙입니다. 데이터 사본을 3개 보유하고, 서로 다른 2종류의 저장 매체에 저장하며, 그중 1개는 물리적으로 분리된 장소(또는 별도 클라우드)에 보관하는 방식입니다.</p>
-      <h2>무엇을 백업할 것인가</h2>
-      <ul><li>데이터베이스 덤프 파일</li><li>사용자 업로드 파일</li><li>애플리케이션 설정 파일 및 환경 변수</li><li>서버 설정(Nginx, systemd 유닛 등)</li></ul>
-      <h2>자동화된 백업 스크립트</h2>
-      <p>cron과 간단한 셸 스크립트만으로도 매일 새벽 데이터베이스를 덤프하고 압축한 뒤 별도 스토리지로 전송하는 자동화를 구성할 수 있습니다.</p>
-      <pre><code>#!/bin/bash
-DATE=$(date +%Y%m%d)
-mysqldump -u root mydb | gzip > /backup/mydb_$DATE.sql.gz
-find /backup -mtime +14 -delete</code></pre>
-      <h2>복구 테스트의 중요성</h2>
-      <p>백업 파일이 있다고 안심해서는 안 됩니다. 정기적으로 실제 복구 절차를 테스트해 보아야 백업이 진짜로 동작하는지 확인할 수 있습니다. 복구해 본 적 없는 백업은 백업이 아니라는 말도 있을 정도입니다.</p>
+      <h2>crontab 기본 문법</h2>
+      <pre><code># ┌─ 분(0-59)
+# │ ┌─ 시(0-23)
+# │ │ ┌─ 일(1-31)
+# │ │ │ ┌─ 월(1-12)
+# │ │ │ │ ┌─ 요일(0-7, 0과 7 모두 일요일)
+# │ │ │ │ │
+  * * * * * 실행할_명령</code></pre>
+      <h2>자주 쓰는 패턴</h2>
+      <table><tr><th>표현식</th><th>의미</th></tr><tr><td><code>0 2 * * *</code></td><td>매일 새벽 2시</td></tr><tr><td><code>*/10 * * * *</code></td><td>10분마다</td></tr><tr><td><code>0 9 * * 1-5</code></td><td>평일 오전 9시</td></tr><tr><td><code>0 0 1 * *</code></td><td>매월 1일 자정</td></tr></table>
+      <h2>crontab 편집과 확인</h2>
+      <p><code>crontab -e</code>로 현재 사용자의 crontab을 편집하고, <code>crontab -l</code>로 등록된 작업 목록을 확인합니다. 시스템 전체 작업은 <code>/etc/cron.d/</code> 디렉토리에 파일로 추가합니다.</p>
+      <h2>로그와 오류 처리</h2>
+      <p>cron 작업의 출력은 기본적으로 메일로 전송되는데, 대부분의 환경에서 메일 설정이 되어 있지 않아 묵묵히 사라집니다. 로그를 남기려면 명령 끝에 <code>&gt;&gt; /var/log/myjob.log 2&gt;&amp;1</code>을 추가해 파일로 기록하는 것이 좋습니다.</p>
+      <h2>주의사항</h2>
+      <ul><li>cron은 기본적으로 최소한의 환경변수만 가집니다. 스크립트 안에서 절대 경로를 사용하거나 PATH를 명시적으로 설정해야 합니다.</li><li>스크립트 파일에 실행 권한(<code>chmod +x</code>)이 있는지 확인하세요.</li></ul>
 
         <div class="post-nav">
-          <a href="linux-disk-monitoring.html" class="prev">&larr; 이전 글<span>리눅스 디스크 사용량 모니터링과 정리 방법</span></a>
-          <a href="linux-process-management.html" class="next">다음 글 &rarr;<span>리눅스 프로세스 관리 명령어 실전 정리</span></a>
+          <a href="linux-process-management.html" class="prev">&larr; 이전 글<span>리눅스 프로세스 관리 명령어 실전 정리</span></a>
+          <a href="web-server-log-analysis.html" class="next">다음 글 &rarr;<span>Nginx/Apache 웹서버 로그 분석 기초</span></a>
         </div>
       </article>
     </div>
